@@ -1,7 +1,7 @@
-using backendCourse1.api.Entities;
+using datingApp.api.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace backendCourse1.api.Data
+namespace datingApp.api.Data
 {
     public class DataContext : DbContext
     {

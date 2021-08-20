@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backendCourse1.api.Data;
-using backendCourse1.api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace backendCourse1.api.Controllers
+using datingApp.api.Data;
+using datingApp.api.Entities;
+using Microsoft.AspNetCore.Authorization;
+
+namespace datingApp.api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly DataContext context;
         public UsersController(DataContext context)
@@ -19,11 +19,13 @@ namespace backendCourse1.api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers(){
             return await this.context.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<AppUser>> GetUser(int id){
             return await this.context.Users.FindAsync(id);
         }
