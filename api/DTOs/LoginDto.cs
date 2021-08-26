@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace datingApp.api.DTOs
 {
-    public class LoginDtos
+    public class LoginDto
     {
         [Required]
         public string Username { get; set; }

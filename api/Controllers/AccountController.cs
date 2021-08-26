@@ -42,15 +42,15 @@ namespace datingApp.api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDtos loginDtos)
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await this.context.Users.SingleOrDefaultAsync(x => x.UserName == loginDtos.Username);
+            var user = await this.context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
             if (user == null) return Unauthorized("Invalid username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDtos.Password));
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
             for (int i = 0; i < computedHash.Length; i++)
             {
