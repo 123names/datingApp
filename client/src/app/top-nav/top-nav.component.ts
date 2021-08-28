@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -11,20 +11,22 @@ import { AccountService } from '../_services/account.service';
 export class TopNavComponent implements OnInit {
 
   user:any = {}
-  constructor(public accountService:AccountService) { }
+  constructor(public accountService:AccountService, private router:Router, private toast:ToastrService) { }
 
   ngOnInit(): void {
   }
 
   login(){
     this.accountService.login(this.user).subscribe(responseData=>{
-      console.log(responseData);
+      this.router.navigateByUrl("/members");
     }, error=>{
       console.log(error);
+      this.toast.error(error.error);
     });
   }
 
   logout(){
     this.accountService.logout();
+    this.router.navigate([""]);
   }
 }
