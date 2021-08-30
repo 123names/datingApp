@@ -19,9 +19,6 @@ export class TopNavComponent implements OnInit {
   login(){
     this.accountService.login(this.user).subscribe(responseData=>{
       this.router.navigateByUrl("/members");
-    }, error=>{
-      console.log(error);
-      this.toast.error(error.error);
     });
   }
 
