@@ -34,24 +34,6 @@ namespace datingApp.api.Data
                 .ProjectTo<MemberDto>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
         }
-
-        public async Task<AppUser> GetUserByIdAsync(int id)
-        {
-            return await this.context.Users.FindAsync(id);
-        }
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
-        {
-            return await this.context.Users
-                .Include(p => p.UserPhotos)
-                .SingleOrDefaultAsync(user => user.UserName == username);
-        }
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
-        {
-            return await this.context.Users
-                .Include(p => p.UserPhotos)
-                .ToListAsync();
-        }
-
         public async Task<bool> SaveAllAsync()
         {
             return await this.context.SaveChangesAsync() > 0;
@@ -61,5 +43,22 @@ namespace datingApp.api.Data
         {
             this.context.Entry(user).State = EntityState.Modified;
         }
+
+        // public async Task<AppUser> GetUserByIdAsync(int id)
+        // {
+        //     return await this.context.Users.FindAsync(id);
+        // }
+        // public async Task<AppUser> GetUserByUsernameAsync(string username)
+        // {
+        //     return await this.context.Users
+        //         .Include(p => p.UserPhotos)
+        //         .SingleOrDefaultAsync(user => user.UserName == username);
+        // }
+        // public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        // {
+        //     return await this.context.Users
+        //         .Include(p => p.UserPhotos)
+        //         .ToListAsync();
+        // }
     }
 }
