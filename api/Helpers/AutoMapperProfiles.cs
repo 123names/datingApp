@@ -11,11 +11,12 @@ namespace datingApp.api.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberDto>()
-                .ForMember(dest=> dest.MainPhotoUrl, option=>option.MapFrom(src=> 
-                    src.UserPhotos.FirstOrDefault(x=>x.IsMain).Url))
-                .ForMember(dest => dest.Age, opt => opt.MapFrom(src=>
+                .ForMember(dest => dest.MainPhotoUrl, option => option.MapFrom(src =>
+                       src.UserPhotos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.Age, opt => opt.MapFrom(src =>
                     src.DateOfBirth.CalculateAge()));
             CreateMap<UserPhoto, UserPhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
         }
     }
 }
