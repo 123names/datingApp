@@ -1,3 +1,5 @@
+using api.Interfaces;
+using api.Services;
 using datingApp.api.Data;
 using datingApp.api.Helpers;
 using datingApp.api.Interfaces;
@@ -12,10 +14,13 @@ namespace datingApp.api.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-            services.AddDbContext<DataContext>(options=>{
+            services.AddDbContext<DataContext>(options =>
+            {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
