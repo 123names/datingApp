@@ -34,7 +34,7 @@
     >
       <img
         class="user_portrait"
-        src="{{ user.userMainDisplayImageUrl }}"
+        src="{{ user.userMainDisplayImageUrl || './assets/user.png' }}"
         alt="{{ user.username }}"
       />
       <a class="dropdown-toggle text-light ml-2" dropdownToggle

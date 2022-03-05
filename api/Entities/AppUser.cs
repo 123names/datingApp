@@ -8,6 +8,7 @@ namespace datingApp.api.Entities
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -23,7 +24,7 @@ namespace datingApp.api.Entities
         public ICollection<UserPhoto> UserPhotos { get; set; }
 
 
-        
+
         // public int GetAge()
         // {
         //     return DateOfBirth.CalculateAge();

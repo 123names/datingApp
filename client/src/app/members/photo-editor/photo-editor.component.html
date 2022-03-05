@@ -34,6 +34,7 @@
       ng2FileDrop
       [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
       (fileOver)="fileOverDropZone($event)"
+      (click)="fileInput.click()"
       [uploader]="uploader"
       class="card bg-faded p-3 text-center mb-3 my-drop-zone"
     >
@@ -42,12 +43,12 @@
     </div>
     <input
       type="file"
+      #fileInput
       ng2FileSelect
       [uploader]="uploader"
       multiple
       hidden
     /><br />
-    <input type="file" ng2FileSelect [uploader]="uploader" hidden />
   </div>
 </div>
 
