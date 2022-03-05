@@ -74,7 +74,6 @@ namespace datingApp.api.Controllers
             {
                 newPhoto.IsMain = true;
             }
-
             user.UserPhotos.Add(newPhoto);
 
             if (await this.userRepository.SaveAllAsync())
@@ -85,5 +84,50 @@ namespace datingApp.api.Controllers
 
             return BadRequest("Error adding new photo");
         }
+
+        // api end-point for change a image as main display image
+        [HttpPut("set-main-photo/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(int photoId)
+        {
+            var user = await this.userRepository.GetUserByUsernameAsync(User.GetUserName());
+
+            var photo = user.UserPhotos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.IsMain) return BadRequest("This photo is already your main photo");
+
+            var currentMain = user.UserPhotos.FirstOrDefault(x => x.IsMain);
+            if (currentMain != null) currentMain.IsMain = false;
+            photo.IsMain = true;
+
+            if (await this.userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Fails to set main photo");
+        }
+
+        // api end-point for delete a image
+        [HttpDelete("delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int photoId)
+        {
+            var user = await this.userRepository.GetUserByUsernameAsync(User.GetUserName());
+
+            var photo = user.UserPhotos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null) return NotFound();
+
+            if (photo.IsMain) return BadRequest("You can't delete your main photo");
+
+            if (photo.PublicId != null)
+            {
+                var result = await this.photoService.DeletePhotoAsync(photo.PublicId);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+            }
+
+            user.UserPhotos.Remove(photo);
+
+            if (await this.userRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to delete the photo");
+        }
+
     }
 }

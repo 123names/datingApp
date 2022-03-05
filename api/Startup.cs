@@ -38,7 +38,7 @@ namespace api
             services.AddApplicationServices(this.config);
             services.AddControllers();
             services.AddCors();
-            services.AddIdentieyServices(this.config);
+            services.AddIdentifyServices(this.config);
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
@@ -54,7 +54,7 @@ namespace api
 
             app.UseRouting();
 
-            app.UseCors(policy=> policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 

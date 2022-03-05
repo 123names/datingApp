@@ -5,29 +5,33 @@ import { AccountService } from '../_services/account.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
 
-  newUser:any = {}
+  newUser: any = {};
 
-  constructor(private accountService:AccountService, private toast:ToastrService) { }
+  constructor(
+    private accountService: AccountService,
+    private toast: ToastrService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  register() {
+    this.accountService.register(this.newUser).subscribe(
+      (response) => {
+        console.log(response);
+        this.cancel();
+      },
+      (error) => {
+        console.log(error);
+        this.toast.error(error.error);
+      }
+    );
   }
-
-  register(){
-    this.accountService.regsiter(this.newUser).subscribe(response=>{
-      console.log(response);
-      this.cancel();
-    },error=>{
-      console.log(error);
-      this.toast.error(error.error);
-    });
-  }
-  cancel(){
+  cancel() {
     this.cancelRegister.emit(false);
   }
-
 }

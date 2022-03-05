@@ -9,6 +9,7 @@ using datingApp.api.Data;
 using datingApp.api.Entities;
 using datingApp.api.DTOs;
 using datingApp.api.Interfaces;
+using System.Linq;
 
 namespace datingApp.api.Controllers
 {
@@ -38,13 +39,13 @@ namespace datingApp.api.Controllers
 
             await this.context.SaveChangesAsync();
 
-            return new UserDto{Username=user.UserName, token=this.tokenService.CreateToken(user)};
+            return new UserDto { Username = user.UserName, token = this.tokenService.CreateToken(user) };
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await this.context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+            var user = await this.context.Users.Include(p => p.UserPhotos).SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
             if (user == null) return Unauthorized("Invalid username");
 
@@ -56,7 +57,12 @@ namespace datingApp.api.Controllers
             {
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
-            return new UserDto{Username=user.UserName, token=this.tokenService.CreateToken(user)};
+            return new UserDto
+            {
+                Username = user.UserName,
+                token = this.tokenService.CreateToken(user),
+                UserMainDisplayImageUrl = user.UserPhotos.FirstOrDefault(x => x.IsMain)?.Url
+            };
         }
 
         private async Task<bool> UserExists(string username)
