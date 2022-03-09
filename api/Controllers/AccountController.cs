@@ -44,7 +44,13 @@ namespace datingApp.api.Controllers
 
             await this.context.SaveChangesAsync();
 
-            return new UserDto { Username = user.UserName, token = this.tokenService.CreateToken(user), KnownAs = user.KnownAs };
+            return new UserDto
+            {
+                Username = user.UserName,
+                token = this.tokenService.CreateToken(user),
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
+            };
         }
 
         [HttpPost("login")]
@@ -67,7 +73,8 @@ namespace datingApp.api.Controllers
                 Username = user.UserName,
                 token = this.tokenService.CreateToken(user),
                 UserMainDisplayImageUrl = user.UserPhotos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 

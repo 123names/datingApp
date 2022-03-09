@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using api.Extensions;
 using api.Interfaces;
 using datingApp.api.Entities;
+using api.Helpers;
 
 namespace datingApp.api.Controllers
 {
@@ -30,9 +31,18 @@ namespace datingApp.api.Controllers
 
         // api end-point for get other user details
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await this.userRepository.GetMembersAsync();
+            var user = await this.userRepository.GetUserByUsernameAsync(User.GetUserName());
+            userParams.CurrentUserName = user.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+
+            var users = await this.userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalItemCount, users.TotalPages);
+
             return Ok(users);
         }
 

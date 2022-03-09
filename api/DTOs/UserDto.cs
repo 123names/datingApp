@@ -6,5 +6,6 @@ namespace datingApp.api.DTOs
         public string token { get; set; }
         public string UserMainDisplayImageUrl { get; set; }
         public string KnownAs { get; set; }
+        public string Gender { get; set; }
     }
 }
