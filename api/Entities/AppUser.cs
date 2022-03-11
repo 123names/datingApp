@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using api.Entities;
 using datingApp.api.Extensions;
 
 namespace datingApp.api.Entities
@@ -21,13 +22,10 @@ namespace datingApp.api.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        // one to many relationship: one user have many user photos
         public ICollection<UserPhoto> UserPhotos { get; set; }
-
-
-
-        // public int GetAge()
-        // {
-        //     return DateOfBirth.CalculateAge();
-        // }
+        // many to many relationship: many users can like one user, this user can like many other users
+        public ICollection<UserLike> LikedUsers { get; set; }
+        public ICollection<UserLike> LikedByUsers { get; set; }
     }
 }

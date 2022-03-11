@@ -24,7 +24,7 @@ namespace datingApp.api.Controllers
         {
             var thing = this.context.Users.Find(-1);
 
-            if (thing==null) return NotFound();
+            if (thing == null) return NotFound();
 
             return Ok(thing);
         }
@@ -38,7 +38,7 @@ namespace datingApp.api.Controllers
         [HttpGet("bad-request")]
         public ActionResult<string> GetBadRequest()
         {
-            return BadRequest("This is not a good request");
+            return BadRequest();
         }
     }
 }
