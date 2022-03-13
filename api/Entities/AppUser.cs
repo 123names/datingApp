@@ -27,5 +27,8 @@ namespace datingApp.api.Entities
         // many to many relationship: many users can like one user, this user can like many other users
         public ICollection<UserLike> LikedUsers { get; set; }
         public ICollection<UserLike> LikedByUsers { get; set; }
+
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }
