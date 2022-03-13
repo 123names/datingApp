@@ -1,17 +1,12 @@
 using System;
 using System.Collections.Generic;
 using api.Entities;
-using datingApp.api.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace datingApp.api.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
         public DateTime UserCreatedOn { get; set; } = DateTime.Now;
@@ -30,5 +25,7 @@ namespace datingApp.api.Entities
 
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
+        // many to many relationship with join table AppUserRole
+        public ICollection<AppUserRole> UserRoles { get; set; }
     }
 }

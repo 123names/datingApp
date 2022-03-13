@@ -1,5 +1,9 @@
 using System.Text;
+using api.Entities;
+using datingApp.api.Data;
+using datingApp.api.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +14,16 @@ namespace datingApp.api.Extensions
     {
         public static IServiceCollection AddIdentifyServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddIdentityCore<AppUser>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+            })
+                .AddRoles<AppRole>()
+                .AddRoleManager<RoleManager<AppRole>>()
+                .AddSignInManager<SignInManager<AppUser>>()
+                .AddRoleValidator<RoleValidator<AppRole>>()
+                .AddEntityFrameworkStores<DataContext>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -20,6 +34,12 @@ namespace datingApp.api.Extensions
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
+            });
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("RequireAtLeastModerateRole", policy => policy.RequireRole("Admin", "Moderator"));
+
             });
             return services;
         }
