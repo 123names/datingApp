@@ -51,11 +51,6 @@ namespace datingApp.api.Data
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(this.mapper.ConfigurationProvider).AsNoTracking(),
             userParams.PageNumber, userParams.PageSize);
         }
-        public async Task<bool> SaveAllAsync()
-        {
-            return await this.context.SaveChangesAsync() > 0;
-        }
-
         public void Update(AppUser user)
         {
             this.context.Entry(user).State = EntityState.Modified;
@@ -76,6 +71,14 @@ namespace datingApp.api.Data
             return await this.context.Users
                 .Include(p => p.UserPhotos)
                 .ToListAsync();
+        }
+
+        public async Task<string> GetUserGender(string username)
+        {
+            return await context.Users
+                .Where(x => x.UserName == username)
+                .Select(x => x.Gender)
+                .FirstOrDefaultAsync();
         }
     }
 }
