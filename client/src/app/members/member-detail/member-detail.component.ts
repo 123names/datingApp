@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { MemberService } from 'src/app/_services/member.service';
 
@@ -11,24 +11,37 @@ import {
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { MessageService } from 'src/app/_services/message.service';
 import { Message } from 'src/app/_models/message';
+import { PresenceService } from 'src/app/_services/presence.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css'],
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, OnDestroy {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   activateTab: TabDirective;
   messages: Message[] = [];
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private accountService: AccountService,
+    public presence: PresenceService,
+    private router: Router
+  ) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.user = user;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    });
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -78,7 +91,15 @@ export class MemberDetailComponent implements OnInit {
   onTabActivated(data: TabDirective) {
     this.activateTab = data;
     if (this.activateTab.heading === 'Messages' && this.messages.length === 0) {
-      this.loadMessage();
+      /* Old method, make API call to load message */
+      // this.loadMessage();
+      /* New method: with signalR, open a connect hub that keep real-time message exchange function*/
+      this.messageService.createHubConnection(this.user, this.member.username);
+    } else {
+      this.messageService.stopHubConnection();
     }
+  }
+  ngOnDestroy(): void {
+    this.messageService.stopHubConnection();
   }
 }

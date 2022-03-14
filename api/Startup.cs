@@ -1,3 +1,4 @@
+using api.SignalR;
 using datingApp.api.Extensions;
 using datingApp.api.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +25,7 @@ namespace api
             services.AddControllers();
             services.AddCors();
             services.AddIdentifyServices(this.config);
+            services.AddSignalR();
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
@@ -39,7 +41,10 @@ namespace api
 
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(policy => policy.AllowAnyHeader()
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 
@@ -48,6 +53,8 @@ namespace api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

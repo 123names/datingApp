@@ -2,6 +2,7 @@ using api.Data;
 using api.Helpers;
 using api.Interfaces;
 using api.Services;
+using api.SignalR;
 using datingApp.api.Data;
 using datingApp.api.Helpers;
 using datingApp.api.Interfaces;
@@ -16,6 +17,7 @@ namespace datingApp.api.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
