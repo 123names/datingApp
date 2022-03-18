@@ -21,6 +21,7 @@ namespace datingApp.api.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<UserPhoto> UserPhotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,6 +61,9 @@ namespace datingApp.api.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserPhoto>()
+                .HasQueryFilter(p => p.IsApproved);
 
             builder.ApplyUtcDateTimeConverter();
         }

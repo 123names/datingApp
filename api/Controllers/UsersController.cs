@@ -50,7 +50,8 @@ namespace datingApp.api.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await this.unitOfWork.userRepository.GetMemberByUsernameAsync(username);
+            var currentUsername = User.GetUserName();
+            return await this.unitOfWork.userRepository.GetMemberByUsernameAsync(username, isCurrentUser: username == currentUsername);
         }
 
         // api end-point for edit one user profiles
@@ -80,10 +81,6 @@ namespace datingApp.api.Controllers
                 PublicId = result.PublicId
             };
 
-            if (user.UserPhotos.Count == 0)
-            {
-                newPhoto.IsMain = true;
-            }
             user.UserPhotos.Add(newPhoto);
 
             if (await this.unitOfWork.Complete())

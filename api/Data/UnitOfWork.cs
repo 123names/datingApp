@@ -23,6 +23,8 @@ namespace api.Data
 
         public ILikesRepository likesRepository => new LikesRepository(this.context);
 
+        public IPhotoRepository photoRepository => new PhotoRepository(this.context);
+
         public async Task<bool> Complete()
         {
             return await this.context.SaveChangesAsync() > 0;
