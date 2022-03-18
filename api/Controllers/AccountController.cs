@@ -1,19 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.Text;
-
-using datingApp.api.Data;
-using datingApp.api.Entities;
-using datingApp.api.DTOs;
-using datingApp.api.Interfaces;
-using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-
-namespace datingApp.api.Controllers
+namespace api.Controllers
 {
     public class AccountController : BaseApiController
     {

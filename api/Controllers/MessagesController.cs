@@ -1,17 +1,3 @@
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Entities;
-using api.Extensions;
-using api.Helpers;
-using api.Interfaces;
-using AutoMapper;
-using datingApp.api.Controllers;
-using datingApp.api.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace api.Controllers
 {
     [Authorize]

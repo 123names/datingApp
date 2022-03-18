@@ -1,4 +1,3 @@
-
 namespace api.Helpers
 {
     public class PaginationParams

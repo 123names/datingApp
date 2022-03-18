@@ -1,6 +1,3 @@
-using System;
-using datingApp.api.Entities;
-
 namespace api.Entities
 {
     public class Message

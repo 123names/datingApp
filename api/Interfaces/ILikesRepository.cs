@@ -1,9 +1,3 @@
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Entities;
-using api.Helpers;
-using datingApp.api.Entities;
-
 namespace api.Interfaces
 {
     public interface ILikesRepository

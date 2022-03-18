@@ -1,13 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using api.Entities;
-using datingApp.api.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace datingApp.api.Data
+namespace api.Data
 {
     public class Seed
     {

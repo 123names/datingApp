@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-namespace datingApp.api.DTOs
+namespace api.DTOs
 {
     public class MemberDto
     {
@@ -10,7 +7,7 @@ namespace datingApp.api.DTOs
         public string MainPhotoUrl { get; set; }
         public int Age { get; set; }
         public string KnownAs { get; set; }
-        public DateTime UserCreatedOn { get; set; } 
+        public DateTime UserCreatedOn { get; set; }
         public DateTime LastActive { get; set; }
         public string Gender { get; set; }
         public string Introduction { get; set; }

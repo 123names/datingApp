@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using api.Entities;
-using Microsoft.AspNetCore.Identity;
-
-namespace datingApp.api.Entities
+namespace api.Entities
 {
     public class AppUser : IdentityUser<int>
     {

@@ -1,15 +1,7 @@
-using System.Text;
-using System.Threading.Tasks;
-using api.Entities;
-using datingApp.api.Data;
-using datingApp.api.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace datingApp.api.Extensions
+namespace api.Extensions
 {
     public static class IdentityServiceExtensions
     {

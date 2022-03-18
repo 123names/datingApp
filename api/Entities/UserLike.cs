@@ -1,6 +1,3 @@
-
-using datingApp.api.Entities;
-
 namespace api.Entities
 {
     public class UserLike

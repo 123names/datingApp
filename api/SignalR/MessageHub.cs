@@ -1,14 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Entities;
-using api.Extensions;
-using api.Interfaces;
-using AutoMapper;
-using datingApp.api.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-
 namespace api.SignalR
 {
     public class MessageHub : Hub

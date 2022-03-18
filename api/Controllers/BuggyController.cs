@@ -1,9 +1,4 @@
-using datingApp.api.Data;
-using datingApp.api.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace datingApp.api.Controllers
+namespace api.Controllers
 {
     public class BuggyController : BaseApiController
     {

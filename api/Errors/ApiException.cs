@@ -1,4 +1,4 @@
-namespace datingApp.api.Errors
+namespace api.Errors
 {
     public class ApiException
     {

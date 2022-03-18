@@ -1,9 +1,5 @@
-using System.Threading.Tasks;
-using api.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using datingApp.api.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace api.Services

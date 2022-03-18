@@ -1,13 +1,4 @@
-using System;
-using System.Linq;
-using api.DTOs;
-using api.Entities;
-using AutoMapper;
-using datingApp.api.DTOs;
-using datingApp.api.Entities;
-using datingApp.api.Extensions;
-
-namespace datingApp.api.Helpers
+namespace api.Helpers
 {
     public class AutoMapperProfiles : Profile
     {

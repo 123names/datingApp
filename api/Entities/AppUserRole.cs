@@ -1,6 +1,3 @@
-using datingApp.api.Entities;
-using Microsoft.AspNetCore.Identity;
-
 namespace api.Entities
 {
     public class AppUserRole : IdentityUserRole<int>

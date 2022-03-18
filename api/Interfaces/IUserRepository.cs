@@ -1,10 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using api.Helpers;
-using datingApp.api.DTOs;
-using datingApp.api.Entities;
-
-namespace datingApp.api.Interfaces
+namespace api.Interfaces
 {
     public interface IUserRepository
     {

@@ -1,7 +1,4 @@
-using api.Helpers;
-using Microsoft.AspNetCore.Mvc;
-
-namespace datingApp.api.Controllers
+namespace api.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]

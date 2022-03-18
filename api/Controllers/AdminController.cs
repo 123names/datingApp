@@ -1,15 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Interfaces;
-using api.Services;
-using datingApp.api.Controllers;
-using datingApp.api.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 namespace api.Controllers
 {
     public class AdminController : BaseApiController

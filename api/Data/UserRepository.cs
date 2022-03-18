@@ -1,16 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.Helpers;
-using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using datingApp.api.DTOs;
-using datingApp.api.Entities;
-using datingApp.api.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
-namespace datingApp.api.Data
+namespace api.Data
 {
     public class UserRepository : IUserRepository
     {

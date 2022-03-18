@@ -1,12 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Interfaces;
-using datingApp.api.Data;
-using datingApp.api.Entities;
-using Microsoft.EntityFrameworkCore;
-
 namespace api.Data
 {
     public class PhotoRepository : IPhotoRepository

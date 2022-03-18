@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace datingApp.api.Entities
+namespace api.Entities
 {
     [Table("UserPhotos")]
     public class UserPhoto

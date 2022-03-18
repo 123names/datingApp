@@ -1,7 +1,3 @@
-
-using System.Threading.Tasks;
-using datingApp.api.Interfaces;
-
 namespace api.Interfaces
 {
     public interface IUnitOfWork

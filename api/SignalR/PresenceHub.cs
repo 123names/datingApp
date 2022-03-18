@@ -1,9 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using api.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
-
 namespace api.SignalR
 {
     [Authorize]

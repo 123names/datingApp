@@ -1,16 +1,3 @@
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.DTOs;
-using api.Entities;
-using api.Helpers;
-using api.Interfaces;
-using datingApp.api.Data;
-using datingApp.api.Entities;
-using datingApp.api.Extensions;
-using Microsoft.EntityFrameworkCore;
-
 namespace api.Data
 {
     public class LikesRepository : ILikesRepository

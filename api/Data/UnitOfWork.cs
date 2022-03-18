@@ -1,9 +1,3 @@
-using System.Threading.Tasks;
-using api.Interfaces;
-using AutoMapper;
-using datingApp.api.Data;
-using datingApp.api.Interfaces;
-
 namespace api.Data
 {
     public class UnitOfWork : IUnitOfWork

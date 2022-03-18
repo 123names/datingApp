@@ -1,6 +1,4 @@
-using System;
-
-namespace datingApp.api.Extensions
+namespace api.Extensions
 {
     public static class DateTimeExtensions
     {
@@ -9,11 +7,12 @@ namespace datingApp.api.Extensions
             var today = DateTime.Today;
             var age = today.Year - dob.Year;
 
-            if(dob.Date>today.AddYears(-age)){
+            if (dob.Date > today.AddYears(-age))
+            {
                 age--;
             }
 
             return age;
-        }   
+        }
     }
 }
