@@ -1,6 +1,6 @@
 <div class="row">
   <h3>Photos</h3>
-  <div class="col-2" *ngFor="let photo of member.userPhotos">
+  <div class="col-2 d-flex flex-column" *ngFor="let photo of member.userPhotos">
     <img
       class="img-thumbnail p-1"
       src="{{ photo.url }}"
@@ -11,9 +11,9 @@
       <span class="text-danger">Awaiting approval</span>
     </div>
 
-    <div class="text-center">
+    <div class="d-flex">
       <button
-        class="btn btn-sm"
+        class="btn btn-sm flex-grow-1 me-1"
         [disabled]="photo.isMain || !photo.isApproved"
         (click)="setMainPhoto(photo)"
         [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'"
@@ -21,7 +21,7 @@
         Main
       </button>
       <button
-        class="btn btn-sm btn-danger"
+        class="btn btn-sm btn-danger flex-grow-1"
         title="Delete"
         (click)="deletePhoto(photo.id)"
         [disabled]="photo.isMain"
@@ -135,7 +135,7 @@
     <div>
       <div>
         Queue progress:
-        <div class="progress mb-3" style="">
+        <div class="progress mb-3">
           <div
             class="progress-bar"
             role="progressbar"
