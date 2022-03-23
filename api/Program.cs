@@ -19,12 +19,16 @@ app.UseCors(policy => policy.AllowAnyHeader()
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
+app.MapFallbackToController("Index", "Fallback");
 
 // Other settings (equal to other settings in the .net5.0 Program.cs)
+// add set of seed user for testing purpose
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try

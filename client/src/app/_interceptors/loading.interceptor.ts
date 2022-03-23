@@ -20,7 +20,7 @@ export class LoadingInterceptor implements HttpInterceptor {
     this.loadingService.busyLoading();
     return next.handle(request).pipe(
       // add a fake delay to show the spinner, remove it in production
-      delay(1000),
+      //delay(1000),
       finalize(() => {
         this.loadingService.idle();
       })

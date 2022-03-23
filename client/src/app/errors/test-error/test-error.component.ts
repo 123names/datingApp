@@ -5,52 +5,64 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-test-error',
   templateUrl: './test-error.component.html',
-  styleUrls: ['./test-error.component.css']
+  styleUrls: ['./test-error.component.css'],
 })
 export class TestErrorComponent implements OnInit {
+  validationErrors: string[] = [];
 
-  validationErrors:string[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  get404Error() {
+    this.http.get(environment.apiURL + 'buggy/not-found').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-
-  get404Error(){
-    this.http.get(environment.apiURL+"buggy/not-found").subscribe(response=>{
-      console.log(response);
-    }, error=>{
-      console.log(error);
-    })
+  get400Error() {
+    this.http.get(environment.apiURL + 'buggy/bad-request').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-  get400Error(){
-    this.http.get(environment.apiURL+"buggy/bad-request").subscribe(response=>{
-      console.log(response);
-    }, error=>{
-      console.log(error);
-    })
+  get500Error() {
+    this.http.get(environment.apiURL + 'buggy/server-error').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-  get500Error(){
-    this.http.get(environment.apiURL+"buggy/server-error").subscribe(response=>{
-      console.log(response);
-    }, error=>{
-      console.log(error);
-    })
+  get401Error() {
+    this.http.get(environment.apiURL + 'buggy/auth').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-  get401Error(){
-    this.http.get(environment.apiURL+"buggy/auth").subscribe(response=>{
-      console.log(response);
-    }, error=>{
-      console.log(error);
-    })
+  get400ValidationError() {
+    this.http.post(environment.apiURL + 'account/register', {}).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        this.validationErrors = error;
+      }
+    );
   }
-  get400ValidationError(){
-    this.http.post(environment.apiURL+"account/register",{}).subscribe(response=>{
-      console.log(response);
-    }, error=>{
-      console.log(error);
-      this.validationErrors = error;
-    })
-  }
-
 }
