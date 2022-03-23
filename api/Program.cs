@@ -19,12 +19,14 @@ app.UseCors(policy => policy.AllowAnyHeader()
 
 app.UseAuthentication();
 app.UseAuthorization();
+// using static file generated from angular for view
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
+// fix routing issue with generated file
 app.MapFallbackToController("Index", "Fallback");
 
 // Other settings (equal to other settings in the .net5.0 Program.cs)
